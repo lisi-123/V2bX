@@ -14,6 +14,7 @@ import (
 	"github.com/InazumaV/V2bX/api/panel"
 	"github.com/InazumaV/V2bX/conf"
 	"github.com/apernet/hysteria/core/v2/server"
+	"github.com/apernet/hysteria/core/v2/internal/pmtud"
 	"github.com/apernet/hysteria/extras/v2/correctnet"
 	"github.com/apernet/hysteria/extras/v2/masq"
 	"github.com/apernet/hysteria/extras/v2/obfs"
@@ -51,7 +52,7 @@ const (
 	defaultStreamReceiveWindow = 8388608                            // 8MB
 	defaultConnReceiveWindow   = defaultStreamReceiveWindow * 5 / 2 // 20MB
 	defaultMaxIdleTimeout      = 30 * time.Second
-	defaultMaxIncomingStreams  = 4096
+	defaultMaxIncomingStreams  = 2048
 	defaultUDPIdleTimeout      = 60 * time.Second
 )
 
@@ -124,7 +125,7 @@ func (n *Hysteria2node) getQUICConfig(config *serverConfig) (*server.QUICConfig,
 		quic.MaxIncomingStreams = config.QUIC.MaxIncomingStreams
 	}
 	// todo fix !linux && !windows && !darwin
-	quic.DisablePathMTUDiscovery = false
+	quic.DisablePathMTUDiscovery = pmtud.DisablePathMTUDiscovery
 
 	return quic, nil
 }
