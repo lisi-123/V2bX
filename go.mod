@@ -5,8 +5,8 @@ go 1.25
 toolchain go1.25.0
 
 require (
-	github.com/apernet/hysteria/core/v2 v2.6.3
-	github.com/apernet/hysteria/extras/v2 v2.6.3
+	github.com/apernet/hysteria/core/v2 v2.6.5
+	github.com/apernet/hysteria/extras/v2 v2.6.5
 	github.com/apernet/quic-go v0.52.1-0.20250607183305-9320c9d14431
 	github.com/beevik/ntp v1.4.4-0.20240716062501-06ef196b89ec
 	github.com/fsnotify/fsnotify v1.9.0
