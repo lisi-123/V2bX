@@ -125,7 +125,8 @@ func (n *Hysteria2node) getQUICConfig(config *serverConfig) (*server.QUICConfig,
 		quic.MaxIncomingStreams = config.QUIC.MaxIncomingStreams
 	}
 	// todo fix !linux && !windows && !darwin
-	quic.DisablePathMTUDiscovery = pmtud.DisablePathMTUDiscovery
+	quic.DisablePathMTUDiscovery =
+	               config.QUIC.DisablePathMTUDiscovery || pmtud.DisablePathMTUDiscovery
 
 	return quic, nil
 }
