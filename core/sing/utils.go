@@ -14,7 +14,16 @@ func processFallback(c *conf.Options, fallbackForALPN map[string]*option.ServerO
 		if err != nil {
 			return fmt.Errorf("unable to parse fallbackForALPN server port error: %s", err)
 		}
-		fallbackForALPN[k] = &option.ServerOptions{Server: v.Server, ServerPort: uint16(fallbackPort)}
+		if fallbackPort <= 0 || fallbackPort > 65535 {
+			return fmt.Errorf("invalid fallbackForALPN port: %d", fallbackPort)
+		}
+		if v.Server == "" {
+			return fmt.Errorf("fallbackForALPN server is empty")
+		}
+		fallbackForALPN[k] = &option.ServerOptions{
+			Server:     v.Server,
+			ServerPort: uint16(fallbackPort),
+		}
 	}
 	return nil
 }
