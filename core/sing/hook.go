@@ -39,7 +39,7 @@ func (h *HookServer) RoutedConnection(_ context.Context, conn net.Conn, m adapte
 		conn.Close()
 		log.Error("[", m.Inbound, "] ", "Limited ", m.User, " by ip or conn")
 		return conn
-	} else if b != nil {
+	} else if b != nil && m.Protocol != "anytls" {
 		conn = rate.NewConnRateLimiter(conn, b)
 	}
 	if l != nil {
